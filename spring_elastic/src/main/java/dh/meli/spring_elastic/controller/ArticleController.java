@@ -3,6 +3,8 @@ package dh.meli.spring_elastic.controller;
 import dh.meli.spring_elastic.model.Article;
 import dh.meli.spring_elastic.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +46,10 @@ public class ArticleController {
     public ResponseEntity<Void> deleteVoidById(@PathVariable int id) {
          service.deleteById(id);
          return ResponseEntity.noContent().build();
-
     }
 
+    @GetMapping("/title/{title}")
+    public Page<Article> getPageByTitle(@PathVariable String title, Pageable pg) {
+        return service.getPageByTitle(title, pg);
+    }
 }

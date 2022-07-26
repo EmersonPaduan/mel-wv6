@@ -4,6 +4,8 @@ import dh.meli.spring_elastic.model.Article;
 import dh.meli.spring_elastic.repository.ArticleRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,12 +29,11 @@ public class ArticleService implements IArticleService {
 
     @Override
     public List<Article> findAll() {
-        List<Article> list = new ArrayList<>();
-
-        Iterable<Article> resp = repo.findAll();
-
-        resp.forEach(list::add);
-        return list ;
+//        List<Article> list = new ArrayList<>();
+//        Iterable<Article> resp = repo.findAll();
+//        resp.forEach(list::add);
+//        return list ;
+        return repo.findAllArticles();
     }
 
     @Override
@@ -44,6 +45,11 @@ public class ArticleService implements IArticleService {
     @Override
     public Article update(Article article) {
         return repo.save(article);
+    }
+
+    @Override
+    public Page<Article> getPageByTitle(String title, Pageable pg) {
+        return repo.findByTitle(title, pg);
     }
 
 }
