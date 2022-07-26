@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter @Setter
@@ -28,5 +29,5 @@ public class Author {
                 joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"), //atributo do author na tabela de ligacao
                 inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id")) // att do book na tabela de ligacao
     @JsonIgnoreProperties("authors")
-    private List<Book> books;
+    private Set<Book> books;
 }

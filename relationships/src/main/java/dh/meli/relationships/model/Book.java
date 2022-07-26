@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter @Setter
@@ -24,5 +25,5 @@ public class Book {
 
     @ManyToMany(mappedBy = "books")
     @JsonIgnoreProperties("books")
-    private List<Author> authors;
+    private Set<Author> authors;
 }
